@@ -13,11 +13,17 @@ class OffboardControl(Node):
         super().__init__('offboard_control_takeoff_and_land')
 
         # Configure QoS profile for publishing and subscribing
-        qos_profile = QoSProfile(
+        qos_profile_pub = QoSProfile(
             reliability=ReliabilityPolicy.BEST_EFFORT,
             durability=DurabilityPolicy.TRANSIENT_LOCAL,
             history=HistoryPolicy.KEEP_LAST,
-            depth=1
+            depth=0
+        )
+        qos_profile_sub = QoSProfile(
+            reliability=ReliabilityPolicy.BEST_EFFORT,
+            durability=DurabilityPolicy.VOLATILE,
+            history=HistoryPolicy.KEEP_LAST,
+            depth=10
         )
 
         # Create publishers
